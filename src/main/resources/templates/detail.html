@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>小花生</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="./font-awesome-4.7.0/css/font-awesome.css" />
+</head>
+<body>
+<div class="container">
+    <div style="display: flex;justify-content: space-between; border-radius: 15px; background-color: #f2dede;" class="panel">
+        <div style="padding: 10px;">
+            <img src="img/peanut.png" style="height: 30px;"/>
+        </div>
+        <div class="btn-group" style="padding-top: 7px; padding-right: 20px;">
+            <button class="btn btn-info">
+                <a href="/write.html" style="text-decoration:none">记一笔</a>
+            </button>
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                个人中心
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#" onclick="alert('暂未开放！敬请期待！')">我的记录</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/logout">退出登录</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8" style="border:1px solid #f2dede; border-radius: 5px">
+            <div id="detailApp">
+                <div v-html="diary.content"></div>
+                <a v-if="diary.userId==userId" v-bind:id="diary.id" onclick="deleteDiary(this)">
+                    <button class="btn btn-danger">删除</button>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-heading list-group-item-danger">
+                    给小花生的小礼物
+                </li>
+                <li class="list-group-item">
+                    <a href="love.html">I LOVE YOU</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="redHeart.html">JUST FOR YOU</a>
+                </li>
+            </ul>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-heading list-group-item-danger">
+                    小花生的照片集
+                </li>
+                <li class="list-group-item">
+                    <a href="heart_album.html">给你一颗小心心</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="cube.html">给你一个小方块</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="cube_rotate.html">还有一个小方块</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <p>
+        &copy 2019-2020 <a href="https://fx7.top" style="color: #000"> 人家故里 </a>All rights reserved
+    </p>
+</div>
+</body>
+<style>
+    .footer{
+        text-align:center;
+        padding:2em 0 0;
+    }
+    .footer p{
+        font-size:1em;
+        color:#B47C9F;
+        margin:0;
+    }
+    .footer p a{
+        color:#fff;
+    }
+    .footer p a:hover{
+        color:#B47C9F;
+    }
+    }
+</style>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/bootstrap.js"></script>
+<script type="text/javascript" src="./js/holder.js"></script>
+<script type="text/javascript" src="./js/html5shiv.min.js"></script>
+<script type="text/javascript" src="./js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="./js/respond.min.js"></script>
+<script type="text/javascript" src="./js/vue.min.js"></script>
+<script type="text/javascript" src="./js/detail.js"></script>
+</html>

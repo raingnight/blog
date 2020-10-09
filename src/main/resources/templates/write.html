@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>记一笔</title>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <form id="diary">
+                <div name="content" id="editor">
+                </div>
+                <textarea id="content" style="width:100%; height:200px;" name="content" hidden="hidden"></textarea>
+            </form>
+            <br>
+            <button id="commit" class="btn btn-info pull-right">记一笔</button>
+        </div>
+        <br>
+        <br>
+        <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-heading list-group-item-danger">
+                        给小花生的小礼物
+                    </li>
+                    <li class="list-group-item">
+                        <a href="love.html">I LOVE YOU</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="redHeart.html">JUST FOR YOU</a>
+                    </li>
+                </ul>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-heading list-group-item-danger">
+                        小花生的照片集
+                    </li>
+                    <li class="list-group-item">
+                        <a href="heart_album.html">给你一颗小心心</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="cube.html">给你一个小方块</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="cube_rotate.html">还有一个小方块</a>
+                    </li>
+                </ul>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <p>
+        &copy 2019-2020 <a href="https://fx7.top" style="color: #000"> 人家故里 </a>All rights reserved
+    </p>
+</div>
+</body>
+<style>
+    .footer{
+        text-align:center;
+        padding:2em 0 0;
+    }
+    .footer p{
+        font-size:1em;
+        color:#B47C9F;
+        margin:0;
+    }
+    .footer p a{
+        color:#fff;
+    }
+    .footer p a:hover{
+        color:#B47C9F;
+    }
+</style>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/bootstrap.js"></script>
+<script type="text/javascript" src="./js/holder.js"></script>
+<script type="text/javascript" src="./js/html5shiv.min.js"></script>
+<script type="text/javascript" src="./js/css3-mediaqueries.js"></script>
+<script type="text/javascript" src="./js/respond.min.js"></script>
+<script type="text/javascript" src="./js/wangEditor.min.js"></script>
+<script type="text/javascript">
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    editor.customConfig.uploadImgShowBase64 = true // 使用 base64 保存图片
+    var $content = $('#content')
+    editor.customConfig.onchange = function(html) {
+        // 监控变化，同步更新到 textarea
+        $content.val(html)
+    }
+    editor.create()
+    $content.val(editor.txt.html())
+    document.getElementById('commit').addEventListener('click', function() {
+        // 读取 html
+        // alert(editor.txt.html())
+        var content = editor.txt.html();
+        if (content!=""){
+            $.ajax({
+                url:"/api/v1/diary/write",
+                data:$("#diary").serialize(),
+                type:"post",
+                success:function (json){
+                    if (json.state==2000){
+                        alert("你已成功记了一笔！")
+                        window.location="index.html"
+                    }else {
+                        alert(json.message)
+                    }
+                }
+            });
+        }
+    }, false)
+</script>
+</html>

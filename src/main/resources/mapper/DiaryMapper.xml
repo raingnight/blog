@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.fx7.yinlu.mapper.DiaryMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="top.fx7.yinlu.model.Diary">
+        <id column="id" property="id" />
+        <result column="content" property="content" />
+        <result column="created" property="created" />
+        <result column="viewCount" property="viewCount" />
+        <result column="status" property="status" />
+    </resultMap>
+    <insert id="insertDiary" parameterType="top.fx7.yinlu.mapper.DiaryMapper">
+        INSERT INTO
+            diary
+        values(null,#{content},now(),0,1)
+    </insert>
+    <update id="updateViewCount" parameterType="Integer" >
+        update
+            diary
+        set
+            viewCount=viewCount+1
+        where
+            id = #{id}
+    </update>
+
+    <select id="getDiaries" resultType="top.fx7.yinlu.model.Diary" >
+        SELECT
+            *
+        FROM
+            diary
+        WHERE
+            status=1
+        ORDER BY
+            id
+    </select>
+
+</mapper>

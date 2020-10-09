@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        body {
+            perspective: 1000px;
+        }
+        
+        #cube {
+            position: relative;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 200px;
+            transform-origin: 50% 50% -100px;
+            /*设置3D的环境*/
+            transform-style: preserve-3d;
+            transition: 2s;
+            transform: translateX(60px) translateY(300px) translateZ(60px);
+        }
+        
+        #cube div {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+        }
+        
+        #cube div:nth-child(1) {
+            top: -200px;
+            transform-origin: bottom;
+            transform: rotateX(90deg);
+        }
+        
+        #cube div:nth-child(2) {
+            top: 200px;
+            transform-origin: top;
+            transform: rotateX(-90deg);
+        }
+        
+        #cube div:nth-child(3) {
+            left: -200px;
+            transform-origin: right;
+            transform: rotateY(-90deg);
+        }
+        
+        #cube div:nth-child(4) {
+            left: 200px;
+            transform-origin: left;
+            transform: rotateY(90deg);
+        }
+        
+        #cube div:nth-child(5) {
+            transform: translateZ(-200deg)
+        }
+        
+        #cube div:nth-child(6) {}
+        
+        body {
+            background-color: black;
+        }
+        
+        #heard {
+            position: relative;
+            width: 300px;
+            height: 600px;
+            margin: 100px auto;
+            transform-style: preserve-3d;
+            animation: rot 10s linear infinite;
+        }
+        
+        @keyframes rot {
+            from {
+                transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg)
+            }
+            to {
+                transform: rotateY(360deg) rotateX(360deg) rotate(270deg)
+            }
+        }
+        
+        #heard div.heard {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 600px;
+            /*border: 2px solid red;*/
+            border-left: 0;
+            border-bottom: 0;
+            border-radius: 50% 50% 0 /40% 50% 0;
+        }
+        
+        #cube img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id=heard>
+        <div id="cube">
+            <div><img class="peanut"/></div>
+            <div><img class="peanut"/></div>
+            <div><img class="peanut"/></div>
+            <div><img class="peanut"/></div>
+            <div><img class="peanut"/></div>
+            <div><img class="peanut"/></div>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/loadImg.js"></script>
+<script type="text/javascript">
+    loadImg('peanut');
+    var colors = ["#FFB6C1", "#DB7093", "#FF69B4", "#483D8B", "# 4169E1", "#87CEFA", "#00BFFF", "#5F9EA0", "#00FA9A",
+        "#00FF7F", "#7FFF00", "#FFFFE0", "#F5DEB3", "#BC8F8F", "#800000"
+    ];
+    var heard = document.getElementById("heard");
+    for (var i = 0; i < 36; i++) {
+        var cdiv = document.createElement("div");
+        cdiv.className = "heard";
+        cdiv.style.border = "2px solid " + colors[i % 15];
+        cdiv.style.borderLeft = "0";
+        cdiv.style.borderBottom = "0";
+        cdiv.style.transform = "rotateY(" + i * 10 + "deg) rotateZ(45deg) translateX(150px)";
+        heard.appendChild(cdiv);
+    }
+</script>
+
+</html>
+	
